@@ -1,35 +1,77 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { useState } from "react";
+import "./App.css";
 
+function Section({ title, children }) {
+  const [open, setOpen] = useState(false);
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <section className="section">
+      <button className="btn-section" onClick={() => setOpen(!open)}>
+        {title}
+      </button>
+      {open && <div className="section-content">{children}</div>}
+    </section>
+  );
 }
 
-export default App
+export default function App() {
+  return (
+    <main className="container">
+      {/* ------------ HERO ------------ */}
+      <header className="header">
+        <h1>Your Name</h1>
+        <p>Aspiring Software Engineer &bull; React &bull; Java &bull; C++</p>
+        <a href="/resume.pdf" target="_blank" className="primary-link">
+    Download PDF
+        </a>
+      </header>
+
+      {/* ------------ SECTIONS ------------ */}
+      <Section title="Skills">
+        <ul>
+          <li>Languages — Java, C++, Python</li>
+          <li>Frontend — React, HTML, CSS</li>
+          <li>Tools — Git, VS Code, Netlify</li>
+        </ul>
+      </Section>
+
+      <Section title="Projects">
+        <h3>Workout Tracker</h3>
+        <p>
+          Small React app that logs sets &amp; reps; stores data in localStorage.
+        </p>
+        <a href="https://github.com/yourname/workout-tracker">GitHub repo</a>
+      </Section>
+
+      <Section title="Experience">
+        <p><strong>Software Engineering Intern – ABC Corp (Jun 2024 – Aug 2024)</strong></p>
+        <ul>
+          <li>Built an internal dashboard with React &amp; Node.</li>
+          <li>Cut page load time 40 % via code‑splitting.</li>
+        </ul>
+      </Section>
+
+      <Section title="Education">
+        <p>B.S. Computer Science – Queens College (Expected May 2026)</p>
+        <p>Relevant coursework: Data Structures • Algorithms • Web Dev</p>
+      </Section>
+
+      {/* ------------ CONTACT FORM ------------ */}
+      <Section title="Contact Form">
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          className="form"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <input name="name" placeholder="Your Name" required />
+          <input name="email" type="email" placeholder="Your Email" required />
+          <textarea name="message" rows="4" placeholder="Message" required />
+          <button type="submit">Send</button>
+        </form>
+        <p className="note">Powered by Netlify Forms – no backend required.</p>
+      </Section>
+    </main>
+  );
+}
