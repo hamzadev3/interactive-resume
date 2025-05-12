@@ -1,67 +1,126 @@
-
-import { useState } from "react";
+// ---------- App.jsx (new) ----------
+import { useState, useEffect } from "react";
 import "./App.css";
 
-function Section({ title, children }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <section className="section">
-      <button
-  className={`btn-section ${open ? 'open' : ''}`}
-  onClick={() => setOpen(!open)}
-      >
-  {title}
-      </button>
-
-      {open && <div className="section-content">{children}</div>}
-    </section>
-  );
-}
-
 export default function App() {
+  /* -- dark‑mode state -- */
+  const [dark, setDark] = useState(() =>
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
+  useEffect(() => {
+    document.body.classList.toggle("dark", dark);
+  }, [dark]);
+
   return (
     <main className="container">
-      {/* ------------ HERO ------------ */}
-      <header className="header">
-        <h1>Your Name</h1>
-        <p>Aspiring Software Engineer &bull; React &bull; Java &bull; C++</p>
+      {/* Theme Toggle */}
+      <button
+        className="theme-toggle"
+        onClick={() => setDark((d) => !d)}
+        aria-label="Toggle dark mode"
+      >
+        {dark ? "☀️" : "🌙"}
+      </button>
+
+      {/* HERO ------------------------------------------------------ */}
+      <header className="hero">
+        {/* ---------- PROFILE PHOTO ---------- */}
+        {/* Place /public/profile.jpg (square 400×400) */}
+        <img
+          src="/Users/HamzaMac/Desktop/Projects/resume/interactive-resume/public/profile.jpg"
+          alt="Hamza Ariyan"
+          className="hero-img"
+        />
+
+        <h1>Hamza Ariyan</h1>
+        <p>Computer Science Student • NYC</p>
+        <p>Python&nbsp;| Java&nbsp;| C++ | Regex | Data Ops</p>
+
         <a href="/resume.pdf" target="_blank" className="primary-link">
-    Download PDF
+          Download PDF Résumé
         </a>
       </header>
 
-      {/* ------------ SECTIONS ------------ */}
-      <Section title="Skills">
+      {/* EXPERIENCE ---------------------------------------------- */}
+      <section className="card">
+        <h3>Database Automation Intern — NYC Department of Buildings</h3>
+        <p className="note">Manhattan, NY | Jun – Aug 2024</p>
         <ul>
-          <li>Languages — Java, C++, Python</li>
-          <li>Frontend — React, HTML, CSS</li>
-          <li>Tools — Git, VS Code, Netlify</li>
+          <li>
+            Parsed <strong>&gt;1 million</strong> files with Python/Regex and
+            generated a filterable spreadsheet for zoning/code queries.
+          </li>
+          <li>
+            Enabled instant look‑ups by location or file ID; reduced manual
+            search time from minutes to seconds.
+          </li>
+          <li>Led a 2‑person task force; delivered ahead of deadline.</li>
         </ul>
-      </Section>
+      </section>
 
-      <Section title="Projects">
-        <h3>Workout Tracker</h3>
-        <p>
-          Small React app that logs sets &amp; reps; stores data in localStorage.
+      {/* PROJECTS ------------------------------------------------- */}
+      <section className="card">
+        <h3>Personal Projects</h3>
+        <p className="note">
+          *Add new projects here – recruiters love seeing your code.*
         </p>
-        <a href="https://github.com/yourname/workout-tracker">GitHub repo</a>
-      </Section>
-
-      <Section title="Experience">
-        <p><strong>Software Engineering Intern – ABC Corp (Jun 2024 – Aug 2024)</strong></p>
+        <h4>Workout Tracker (React)</h4>
         <ul>
-          <li>Built an internal dashboard with React &amp; Node.</li>
-          <li>Cut page load time 40 % via code‑splitting.</li>
+          <li>Logs sets &amp; reps; data in localStorage (Supabase planned).</li>
+          <li>
+            Code:{" "}
+            <a
+              href="https://github.com/hamzadev3/workout-tracker"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              github.com/hamzadev3/workout-tracker
+            </a>
+          </li>
         </ul>
-      </Section>
+      </section>
 
-      <Section title="Education">
-        <p>B.S. Computer Science – Queens College (Expected May 2026)</p>
-        <p>Relevant coursework: Data Structures • Algorithms • Web Dev</p>
-      </Section>
+      {/* SKILLS --------------------------------------------------- */}
+      <section className="card">
+        <h3>Technical Skills</h3>
+        <ul>
+          <li>
+            <strong>Languages —</strong> Java, C++, Python, basic HTML/CSS
+          </li>
+          <li>
+            <strong>Tools —</strong> Git &amp; GitHub, VS Code, Netlify CI
+          </li>
+          <li>
+            <strong>Concepts —</strong> Data Structures, Regex, File IO,
+            Object‑Oriented Design
+          </li>
+        </ul>
+      </section>
 
-      {/* ------------ CONTACT FORM ------------ */}
-      <Section title="Contact Form">
+      {/* EDUCATION ----------------------------------------------- */}
+      <section className="card">
+        <h3>B.Sc. Computer Science — King College</h3>
+        <p className="note">Queens, NY | Enrolled Sep 2022 • Expected 2027</p>
+        <h4 className="mt-2">Relevant Coursework</h4>
+        <ul>
+          <li>Data Structures · Theory of Computation · Computer Organization</li>
+          <li>Discrete Structures · Linear Algebra · Calculus I‑III</li>
+        </ul>
+      </section>
+
+      {/* OTHER WORK ---------------------------------------------- */}
+      <section className="card">
+        <h3>Additional Work History</h3>
+        <ul>
+          <li>Uber Eats Courier (Apr 2022 – May 2025) — 4.9★ reliability.</li>
+          <li>Macy’s Receiving &amp; Floor (Jul 2024 – Jan 2025).</li>
+          <li>Shake Shack Line Cook (Apr 2022 – Oct 2023).</li>
+        </ul>
+      </section>
+
+      {/* CONTACT -------------------------------------------------- */}
+      <section className="card">
+        <h3>Contact Me</h3>
         <form
           name="contact"
           method="POST"
@@ -74,8 +133,10 @@ export default function App() {
           <textarea name="message" rows="4" placeholder="Message" required />
           <button type="submit">Send</button>
         </form>
-        <p className="note">Powered by Netlify Forms – no backend required.</p>
-      </Section>
+        <p className="note">
+          Powered by Netlify Forms — no backend maintenance.
+        </p>
+      </section>
     </main>
   );
 }
