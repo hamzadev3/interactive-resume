@@ -6,9 +6,13 @@ function Section({ title, children }) {
   const [open, setOpen] = useState(false);
   return (
     <section className="section">
-      <button className="btn-section" onClick={() => setOpen(!open)}>
-        {title}
+      <button
+  className={`btn-section ${open ? 'open' : ''}`}
+  onClick={() => setOpen(!open)}
+      >
+  {title}
       </button>
+
       {open && <div className="section-content">{children}</div>}
     </section>
   );
