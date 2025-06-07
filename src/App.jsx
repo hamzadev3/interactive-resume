@@ -22,24 +22,18 @@ export default function App() {
         {dark ? "☀️" : "🌙"}
       </button>
 
-      {/* HERO ------------------------------------------------------ */}
-      <header className="hero">
-        {/* ---------- PROFILE PHOTO ---------- */}
-        {/* Place /public/profile.jpg (square 400×400) */}
-        <img
-          src="/Users/HamzaMac/Desktop/Projects/resume/interactive-resume/public/profile.jpg"
-          alt="Hamza Ariyan"
-          className="hero-img"
-        />
+      {/* ---------- HERO ---------- */}
+<header className="hero">
+  <img src="/profile.jpg" alt="Hamza Ariyan" className="hero-img" />
+  <h1>Hamza Ariyan</h1>
+  <p>Computer Science Student • NYC</p>
+  <p>Python&nbsp;| Java&nbsp;| C++ | Regex | Data Ops</p>
 
-        <h1>Hamza Ariyan</h1>
-        <p>Computer Science Student • NYC</p>
-        <p>Python&nbsp;| Java&nbsp;| C++ | Regex | Data Ops</p>
+  <a href="/resume.pdf" target="_blank" className="primary-link">
+    Download PDF Résumé
+  </a>
+</header>
 
-        <a href="/resume.pdf" target="_blank" className="primary-link">
-          Download PDF Résumé
-        </a>
-      </header>
 
       {/* EXPERIENCE ---------------------------------------------- */}
       <section className="card">
@@ -61,9 +55,9 @@ export default function App() {
       {/* PROJECTS ------------------------------------------------- */}
       <section className="card">
         <h3>Personal Projects</h3>
-        <p className="note">
+        {/* <p className="note">
           *Add new projects here – recruiters love seeing your code.*
-        </p>
+        </p> */}
         <h4>Workout Tracker (React)</h4>
         <ul>
           <li>Logs sets &amp; reps; data in localStorage (Supabase planned).</li>
@@ -100,7 +94,7 @@ export default function App() {
       {/* EDUCATION ----------------------------------------------- */}
       <section className="card">
         <h3>B.Sc. Computer Science — King College</h3>
-        <p className="note">Queens, NY | Enrolled Sep 2022 • Expected 2027</p>
+        <p className="note">Queens, NY | Expected Graduation: 2027</p>
         <h4 className="mt-2">Relevant Coursework</h4>
         <ul>
           <li>Data Structures · Theory of Computation · Computer Organization</li>
@@ -119,7 +113,8 @@ export default function App() {
       </section>
 
       {/* CONTACT -------------------------------------------------- */}
-      <section className="card">
+      
+      {/* <section className="card">
         <h3>Contact Me</h3>
         <form
           name="contact"
@@ -136,7 +131,7 @@ export default function App() {
         <p className="note">
           Powered by Netlify Forms — no backend maintenance.
         </p>
-      </section>
+      </section>  */}
     </main>
   );
 }
